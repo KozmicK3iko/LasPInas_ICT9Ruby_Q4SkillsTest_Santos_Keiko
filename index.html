@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Virtual Notebooks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-bg">
+    <div class="login-card">
+        <div class="logo-placeholder">🎓<3</div>
+        <h1>Login</h1>
+        
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter here">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="********">
+        </div>
+
+        <div class="options">
+            <label><input type="checkbox"> Stay logged in</label>
+            <p class="sub-text">Your session will stay active on this device.</p>
+        </div>
+
+        <div class="button-row">
+            <button onclick="handleLogin()" class="btn-login">Login</button>
+            <button class="btn-cancel">Cancel</button>
+        </div>
+
+        <a href="#" class="forgot-link">Forgot username / password?</a>
+        <p id="message" style="color: red; font-size: 12px; margin-top: 10px;"></p>
+    </div>
+
+    <script>
+        let attempts = 0;
+
+        function handleLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const msg = document.getElementById('message');
+
+            if (attempts >= 3) {
+                msg.innerText = "Account locked: Too many failed attempts.";
+                return;
+            }
+
+            if (user === "YuriLover1" && pass === "MIZISUA") {
+                // Success: Redirect to notebooks
+                window.location.href = "notebooks.html";
+            } else {
+                attempts++;
+                if (attempts >= 3) {
+                    msg.innerText = "Too many attempts. Access denied.";
+                } else {
+                    msg.innerText = `Invalid credentials. ${3 - attempts} attempts remaining.`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
